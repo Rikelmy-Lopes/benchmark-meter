@@ -1,10 +1,6 @@
 import { IResult } from './types';
+import { IDataResult } from './types/IDataResult';
 
-interface IDataResult {
-    get(): IResult[]
-    fastest(): IResult
-    slowest(): IResult
-}
 
 export class DataResult implements IDataResult {
   private results: IResult[];

@@ -1,12 +1,13 @@
 import { DataResult } from './DataResult';
-import { IFunction, IFunctionObject, IOptions, IResult } from './types';
+import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance, PerformanceObserver } from 'perf_hooks';
 
+
 export class Benchmark {
-  private tests: IFunctionObject[] = [];
+  private tests: ITest[] = [];
   private results: IResult[] = [];
   private repeatCount: number;
-  private perfObserver: PerformanceObserver;
+  private perfObserver: PerformanceObserver | undefined;
 
   constructor(options: IOptions) {
     if (options.repeatCount && options.repeatCount <= 0) {

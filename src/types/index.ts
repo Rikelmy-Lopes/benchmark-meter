@@ -1,7 +1,7 @@
 
 export type IFunction = () => unknown;
 
-export interface IFunctionObject {
+export interface ITest {
     name: string;
     fn: IFunction;
     repeat: number;
