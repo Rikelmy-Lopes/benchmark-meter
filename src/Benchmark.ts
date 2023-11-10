@@ -3,12 +3,21 @@ import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance, PerformanceObserver } from 'perf_hooks';
 
 
+/**
+ * Represents a benchmarking utility for measuring the performance of algorithms.
+ */
 export class Benchmark {
   private tests: ITest[] = [];
   private results: IResult[] = [];
   private repeatCount: number;
   private perfObserver: PerformanceObserver | undefined;
 
+  /**
+   * Creates an instance of Benchmark.
+   *
+   * @param {IOptions} options - The options for configuring the benchmark.
+   * @throws Will throw an error if the repeat count is not greater than 0.
+   */
   constructor(options: IOptions = {}) {
     if (options.repeatCount && options.repeatCount <= 0) {
       throw new Error('Repeat count must be greater than 0');
@@ -18,6 +27,14 @@ export class Benchmark {
     this.initializePerformanceObserver();
   }
 
+  /**
+   * Adds a test to the benchmark.
+   *
+   * @param {string} name - The name of the test.
+   * @param {IFunction} fn - The callback function with the algorithm to be benchmarked.
+   * @param {number | undefined} repeatCount - The number of times to repeat the test (optional).
+   * @throws Will throw an error if the test name is already used or if the repeat count is not greater than 0.
+   */
   public add(name: string, fn: IFunction, repeatCount?: number | undefined): void {
     if (this.isNameAlreadyUsed(name)) {
       throw new Error(`Test with name "${name}" already exists`);
@@ -34,6 +51,12 @@ export class Benchmark {
     });
   }
 
+  /**
+   * Runs all added tests and returns the results as a DataResult instance.
+   *
+   * @returns {Promise<DataResult>} A promise that resolves to a DataResult instance.
+   * @throws Will throw an error if no tests have been added.
+   */
   public async run(): Promise<DataResult> {
     if (this.tests.length === 0) {
       throw new Error('At least one test must be added');
@@ -46,10 +69,16 @@ export class Benchmark {
     return new DataResult(this.results);
   }
 
+  /**
+   * Clears the results array.
+   */
   public clearResults(): void {
     this.results = [];
   }
 
+  /**
+   * Clears the tests array.
+   */
   public clearTests(): void {
     this.tests = [];
   }
