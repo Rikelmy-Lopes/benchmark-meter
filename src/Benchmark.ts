@@ -73,10 +73,13 @@ export class Benchmark {
   private calculateResults(perfEntries: PerformanceEntry[], name: string, repeat: number): void {
     const totalDuration = perfEntries.reduce((acc, entry) => acc + entry.duration, 0);
     const averageDuration = totalDuration / repeat;
+    const sortedPerfEntries = perfEntries.sort((a, b) => a.duration - b.duration);
 
     this.results.push({
       name,
-      average: `${averageDuration.toFixed(4)} ms`
+      average: `${averageDuration.toFixed(4)}ms`,
+      fastest: `${sortedPerfEntries[0].duration.toFixed(4)}ms`,
+      slowest: `${sortedPerfEntries[sortedPerfEntries.length - 1].duration.toFixed(4)}ms`
     });
   }
 

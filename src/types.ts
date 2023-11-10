@@ -10,6 +10,8 @@ export interface IFunctionObject {
 export interface IResult {
     name: string;
     average: string;
+    fastest: string;
+    slowest: string;
 }
 
 export interface IOptions {
