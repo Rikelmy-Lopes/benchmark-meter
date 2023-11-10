@@ -9,7 +9,7 @@ export class Benchmark {
   private repeatCount: number;
   private perfObserver: PerformanceObserver | undefined;
 
-  constructor(options: IOptions) {
+  constructor(options: IOptions = {}) {
     if (options.repeatCount && options.repeatCount <= 0) {
       throw new Error('Repeat count must be greater than 0');
     }
@@ -20,7 +20,7 @@ export class Benchmark {
 
   public add(name: string, fn: IFunction, repeatCount?: number | undefined): void {
     if (this.isNameAlreadyUsed(name)) {
-      throw new Error(`Test with name '${name}' already exists`);
+      throw new Error(`Test with name "${name}" already exists`);
     }
 
     if (repeatCount && repeatCount <= 0) {
@@ -78,9 +78,9 @@ export class Benchmark {
 
     this.results.push({
       name,
-      average: `${averageDuration.toFixed(4)}ms`,
-      fastest: `${sortedPerfEntries[0].duration.toFixed(4)}ms`,
-      slowest: `${sortedPerfEntries[sortedPerfEntries.length - 1].duration.toFixed(4)}ms`
+      average: `${averageDuration.toFixed(2)}ms`,
+      fastest: `${sortedPerfEntries[0].duration.toFixed(2)}ms`,
+      slowest: `${sortedPerfEntries[sortedPerfEntries.length - 1].duration.toFixed(2)}ms`
     });
   }
 
