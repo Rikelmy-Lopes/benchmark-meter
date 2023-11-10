@@ -1,15 +1,17 @@
 import { DataResult } from './DataResult';
 import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance, PerformanceObserver } from 'perf_hooks';
+import { IDataResult } from './types/IDataResult';
+import { IBenchmark } from './types/IBenchmark';
 
 
 /**
  * Represents a benchmarking utility for measuring the performance of algorithms.
  */
-export class Benchmark {
+export class Benchmark implements IBenchmark {
   private tests: ITest[] = [];
   private results: IResult[] = [];
-  private repeatCount: number;
+  private repeat: number;
   private perfObserver: PerformanceObserver | undefined;
 
   /**
@@ -19,11 +21,11 @@ export class Benchmark {
    * @throws Will throw an error if the repeat count is not greater than 0.
    */
   constructor(options: IOptions = {}) {
-    if (options.repeatCount && options.repeatCount <= 0) {
-      throw new Error('Repeat count must be greater than 0');
+    if (options.repeat !== undefined && options.repeat <= 0) {
+      throw new Error('Repeat must be greater than 0');
     }
 
-    this.repeatCount = options.repeatCount || 10;
+    this.repeat = options.repeat ?? 10;
     this.initializePerformanceObserver();
   }
 
@@ -32,22 +34,22 @@ export class Benchmark {
    *
    * @param {string} name - The name of the test.
    * @param {IFunction} fn - The callback function with the algorithm to be benchmarked.
-   * @param {number | undefined} repeatCount - The number of times to repeat the test (optional).
+   * @param {number | undefined} repeat - The number of times to repeat the test (optional).
    * @throws Will throw an error if the test name is already used or if the repeat count is not greater than 0.
    */
-  public add(name: string, fn: IFunction, repeatCount?: number | undefined): void {
+  public add(name: string, fn: IFunction, repeat?: number | undefined): void {
     if (this.isNameAlreadyUsed(name)) {
       throw new Error(`Test with name "${name}" already exists`);
     }
 
-    if (repeatCount && repeatCount <= 0) {
-      throw new Error('Repeat count must be greater than 0');
+    if (repeat !== undefined && repeat <= 0) {
+      throw new Error('Repeat must be greater than 0');
     }
 
     this.tests.push({
       name,
       fn,
-      repeat: repeatCount || this.repeatCount
+      repeat: repeat ?? this.repeat
     });
   }
 
@@ -57,7 +59,7 @@ export class Benchmark {
    * @returns {Promise<DataResult>} A promise that resolves to a DataResult instance.
    * @throws Will throw an error if no tests have been added.
    */
-  public async run(): Promise<DataResult> {
+  public async run(): Promise<IDataResult> {
     if (this.tests.length === 0) {
       throw new Error('At least one test must be added');
     }
