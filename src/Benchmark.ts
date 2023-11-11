@@ -1,6 +1,6 @@
 import { DataResult } from './DataResult';
 import { IFunction, ITest, IOptions, IResult } from './types';
-import { performance, PerformanceObserver } from 'perf_hooks';
+import { performance } from 'node:perf_hooks';
 import { IDataResult } from './types/IDataResult';
 import { IBenchmark } from './types/IBenchmark';
 
@@ -12,7 +12,6 @@ export class Benchmark implements IBenchmark {
   private tests: ITest[] = [];
   private results: IResult[] = [];
   private repeat: number;
-  private perfObserver: PerformanceObserver | undefined;
 
   /**
    * Creates an instance of Benchmark.
@@ -26,7 +25,6 @@ export class Benchmark implements IBenchmark {
     }
 
     this.repeat = options.repeat ?? 10;
-    this.initializePerformanceObserver();
   }
 
   /**
@@ -86,32 +84,27 @@ export class Benchmark implements IBenchmark {
   }
 
   private async executeNTimes(name: string, fn: IFunction, repeat: number): Promise<void> {
+    const durations = [];
     for (let i = 0; i < repeat; i += 1) {
-      performance.mark('start');
+      performance.mark('benchmark-start');
       await fn();
-      performance.mark('end');
-      performance.measure(name, 'start', 'end');
+      performance.mark('benchmark-end');
+      const measure = performance.measure(name, 'benchmark-start', 'benchmark-end');
+      durations.push(measure.duration);
     }
-    this.calculateResults(performance.getEntriesByType('measure'), name, repeat);
-    performance.clearMeasures();
+    this.calculateResults(durations, name, repeat);
   }
 
-  private initializePerformanceObserver(): void {
-    this.perfObserver = new PerformanceObserver(() => undefined);
-
-    this.perfObserver.observe({ entryTypes: ['measure'], buffered: true });
-  }
-
-  private calculateResults(perfEntries: PerformanceEntry[], name: string, repeat: number): void {
-    const totalDuration = perfEntries.reduce((acc, entry) => acc + entry.duration, 0);
+  private calculateResults(durations: number[], name: string, repeat: number): void {
+    const totalDuration = durations.reduce((acc, duration) => acc + duration, 0);
     const averageDuration = totalDuration / repeat;
-    const sortedPerfEntries = perfEntries.sort((a, b) => a.duration - b.duration);
+    const sortedDurations = durations.sort((a, b) => a - b);
 
     this.results.push({
       name,
       average: `${averageDuration.toFixed(2)}ms`,
-      fastest: `${sortedPerfEntries[0].duration.toFixed(2)}ms`,
-      slowest: `${sortedPerfEntries[sortedPerfEntries.length - 1].duration.toFixed(2)}ms`
+      fastest: `${sortedDurations[0].toFixed(2)}ms`,
+      slowest: `${sortedDurations[sortedDurations.length - 1].toFixed(2)}ms`
     });
   }
 
