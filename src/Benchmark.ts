@@ -3,6 +3,7 @@ import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
 import { IDataResult } from './types/IDataResult';
 import { IBenchmark } from './types/IBenchmark';
+import { DuplicateNameException, InvalidRepeatException, NoTestsAddedException } from './exceptions';
 
 
 /**
@@ -21,7 +22,7 @@ export class Benchmark implements IBenchmark {
    */
   constructor(options: IOptions = {}) {
     if (options.repeat !== undefined && options.repeat <= 0) {
-      throw new Error('Repeat must be greater than 0');
+      throw new InvalidRepeatException();
     }
 
     this.repeat = options.repeat ?? 10;
@@ -37,11 +38,11 @@ export class Benchmark implements IBenchmark {
    */
   public add(name: string, fn: IFunction, repeat?: number | undefined): void {
     if (this.isNameAlreadyUsed(name)) {
-      throw new Error(`Test with name "${name}" already exists`);
+      throw new DuplicateNameException(name);
     }
 
     if (repeat !== undefined && repeat <= 0) {
-      throw new Error('Repeat must be greater than 0');
+      throw new InvalidRepeatException();
     }
 
     this.tests.push({
@@ -59,7 +60,7 @@ export class Benchmark implements IBenchmark {
    */
   public async run(): Promise<IDataResult> {
     if (this.tests.length === 0) {
-      throw new Error('At least one test must be added');
+      throw new NoTestsAddedException();
     }
 
     for (const { name, fn, repeat } of this.tests) {
