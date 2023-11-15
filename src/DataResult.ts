@@ -28,36 +28,36 @@ export class DataResult {
   }
 
   /**
-   * Gets the fastest result.
+   * Gets the fastest algorithm.
    *
-   * @returns {IResult} The fastest result.
+   * @returns {IResult} The fastest algorithm.
    */
   public fastest(): IResult {
     return this.results[0];
   }
 
   /**
-   * Gets the array of results sorted from fastest to slowest.
+   * Gets the array of algorithms sorted from fastest to slowest.
    *
-   * @returns {IResult[]} The array of results sorted from fastest to slowest.
+   * @returns {IResult[]} The array of algorithms sorted from fastest to slowest.
    */
   public fastestToSlowest(): IResult[] {
     return this.sortedResults;
   }
 
   /**
-   * Gets the slowest result.
+   * Gets the slowest algorithm.
    *
-   * @returns {IResult} The slowest result.
+   * @returns {IResult} The slowest algorithm.
    */
   public slowest(): IResult {
     return this.sortedResults[this.sortedResults.length - 1];
   }
 
   /**
-   * Gets the array of results sorted from slowest to fastest.
+   * Gets the array of algorithms sorted from slowest to fastest.
    *
-   * @returns {IResult[]} The array of results sorted from slowest to fastest.
+   * @returns {IResult[]} The array of algorithms sorted from slowest to fastest.
    */
   public slowestToFastest(): IResult[] {
     return [...this.sortedResults].reverse();

@@ -1,5 +1,5 @@
 import { DataResult } from './DataResult';
-import { IFunction, ITest, IOptions, IResult } from './types';
+import { IAlgorithm, IOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
 import { DuplicateNameException, NoTestsAddedException } from './exceptions';
 import { ConfigHandler } from './config/ConfigHandler';
@@ -9,7 +9,7 @@ import { ConfigHandler } from './config/ConfigHandler';
  * Represents a benchmarking utility for measuring the performance of algorithms.
  */
 export class Benchmark {
-  private tests: ITest[] = [];
+  private algorithms: IAlgorithm[] = [];
   private results: IResult[] = [];
   private options: IOptions;
 
@@ -23,19 +23,19 @@ export class Benchmark {
   }
 
   /**
-   * Adds a test to the benchmark.
+   * Adds a algorithm to the Benchmark.
    *
-   * @param {string} name - The name of the test.
+   * @param {string} name - The name of the algorithm.
    * @param {IFunction} fn - The callback function with the algorithm to be benchmarked.
-   * @param {number | undefined} repeat - The number of times to repeat the test (optional).
-   * @throws Will throw an error if the test name is already used or if the repeat count is not greater than 0.
+   * @param {number | undefined} repeat - The number of times to repeat the algorithm (optional).
+   * @throws Will throw an error if the algorithm name is already used or if the repeat count is not greater than 0.
    */
-  public add(name: string, fn: IFunction, repeat?: number | undefined): void {
+  public add(name: string, fn: () => unknown, repeat?: number | undefined): void {
     if (this.isNameAlreadyUsed(name)) {
       throw new DuplicateNameException(name);
     }
 
-    this.tests.push({
+    this.algorithms.push({
       name,
       fn,
       repeat: repeat ?? this.options.repeat as number,
@@ -43,17 +43,17 @@ export class Benchmark {
   }
 
   /**
-   * Runs all added tests and returns the results as a DataResult instance.
+   * Runs all added algorithms and returns the results as a DataResult instance.
    *
    * @returns {Promise<DataResult>} A promise that resolves to a DataResult instance.
-   * @throws Will throw an error if no tests have been added.
+   * @throws Will throw an error if no algorithms have been added.
    */
   public async run(): Promise<DataResult> {
-    if (this.tests.length === 0) {
+    if (this.algorithms.length === 0) {
       throw new NoTestsAddedException();
     }
 
-    for (const { name, fn, repeat } of this.tests) {
+    for (const { name, fn, repeat } of this.algorithms) {
       await this.executeNTimes(name, fn, repeat);
     }
     
@@ -68,13 +68,13 @@ export class Benchmark {
   }
 
   /**
-   * Clears the tests array.
+   * Clears the algorithm array.
    */
-  public clearTests(): void {
-    this.tests = [];
+  public clearAlgorithms(): void {
+    this.algorithms = [];
   }
 
-  private async executeNTimes(name: string, fn: IFunction, repeat: number): Promise<void> {
+  private async executeNTimes(name: string, fn: () => unknown, repeat: number): Promise<void> {
     const durations = [];
     for (let i = 0; i < repeat; i += 1) {
       performance.mark('benchmark-start');
@@ -100,6 +100,6 @@ export class Benchmark {
   }
 
   private isNameAlreadyUsed(name: string): boolean {
-    return this.tests.some((test) => test.name === name);
+    return this.algorithms.some((algorithm) => algorithm.name === name);
   }
 }

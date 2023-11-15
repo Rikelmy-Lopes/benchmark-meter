@@ -1,43 +1,42 @@
 
-export type IFunction = () => unknown;
 
 export type ITypes = 'string' | 'number' | 'boolean' | 'array' | 'object' | 'function';
 
-export interface ITest {
+export interface IAlgorithm {
     name: string;
-    fn: IFunction;
+    fn: () => unknown;
     repeat: number;
 }
 
 /**
- * Represents the result of a performance measurement for a specific test.
+ * Represents the result of a performance measurement for a specific algorithm.
  *
  * @interface IResult
  */
 export interface IResult {
     /**
-     * The name of the test.
+     * The name of the algorithm.
      *
      * @type {string}
      */
     name: string;
   
     /**
-     * The average duration of the test in a human-readable format.
+     * The average duration of the algorithm in a human-readable format.
      *
      * @type {string}
      */
     average: string;
   
     /**
-     * The duration of the fastest execution of the test in a human-readable format.
+     * The duration of the fastest execution of the algorithm in a human-readable format.
      *
      * @type {string}
      */
     fastest: string;
   
     /**
-     * The duration of the slowest execution of the test in a human-readable format.
+     * The duration of the slowest execution of the algorithm in a human-readable format.
      *
      * @type {string}
      */
@@ -56,7 +55,7 @@ export interface IOptions {
      * The number of times the algorithm will be executed.
      *
      * @remarks
-     * This value determines how many times the algorithm or function will be repeated for accurate performance measurement.
+     * This value determines how many times the algorithm will be repeated for accurate performance measurement.
      * @default 10
 
      * @type {number}
