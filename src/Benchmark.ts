@@ -3,7 +3,8 @@ import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
 import { IDataResult } from './types/IDataResult';
 import { IBenchmark } from './types/IBenchmark';
-import { DuplicateNameException, InvalidRepeatException, NoTestsAddedException } from './exceptions';
+import { DuplicateNameException, NoTestsAddedException } from './exceptions';
+import { ConfigHandler } from './config/ConfigHandler';
 
 
 /**
@@ -12,20 +13,15 @@ import { DuplicateNameException, InvalidRepeatException, NoTestsAddedException }
 export class Benchmark implements IBenchmark {
   private tests: ITest[] = [];
   private results: IResult[] = [];
-  private repeat: number;
+  private options: IOptions;
 
   /**
    * Creates an instance of Benchmark.
    *
    * @param {IOptions} options - The options for configuring the benchmark.
-   * @throws Will throw an error if the repeat count is not greater than 0.
    */
   constructor(options: IOptions = {}) {
-    if (options.repeat !== undefined && options.repeat <= 0) {
-      throw new InvalidRepeatException();
-    }
-
-    this.repeat = options.repeat ?? 10;
+    this.options = ConfigHandler.parse(options);
   }
 
   /**
@@ -41,14 +37,10 @@ export class Benchmark implements IBenchmark {
       throw new DuplicateNameException(name);
     }
 
-    if (repeat !== undefined && repeat <= 0) {
-      throw new InvalidRepeatException();
-    }
-
     this.tests.push({
       name,
       fn,
-      repeat: repeat ?? this.repeat
+      repeat: repeat ?? this.options.repeat as number,
     });
   }
 
@@ -66,7 +58,7 @@ export class Benchmark implements IBenchmark {
     for (const { name, fn, repeat } of this.tests) {
       await this.executeNTimes(name, fn, repeat);
     }
-
+    
     return new DataResult(this.results);
   }
 

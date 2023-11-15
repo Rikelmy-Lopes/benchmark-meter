@@ -6,10 +6,10 @@ export class DuplicateNameException extends Error {
   }
 }
   
-export class InvalidRepeatException extends Error {
-  constructor() {
-    super('Invalid option for repeat. It must be a number greater than 0.');
-    this.name = 'InvalidRepeatException';
+export class InvalidValueException extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'InvalidValueException';
   }
 }
   

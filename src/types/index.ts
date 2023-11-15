@@ -1,6 +1,8 @@
 
 export type IFunction = () => unknown;
 
+export type ITypes = 'string' | 'number' | 'boolean' | 'array' | 'object' | 'function';
+
 export interface ITest {
     name: string;
     fn: IFunction;
@@ -57,8 +59,7 @@ export interface IOptions {
      * This value determines how many times the algorithm or function will be repeated for accurate performance measurement.
      * @default 10
 
-     * @type {number | undefined}
+     * @type {number}
      */
-    repeat?: number | undefined;
+    repeat?: number;
   }
-  
