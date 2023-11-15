@@ -1,8 +1,6 @@
 import { DataResult } from './DataResult';
 import { IFunction, ITest, IOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
-import { IDataResult } from './types/IDataResult';
-import { IBenchmark } from './types/IBenchmark';
 import { DuplicateNameException, NoTestsAddedException } from './exceptions';
 import { ConfigHandler } from './config/ConfigHandler';
 
@@ -10,7 +8,7 @@ import { ConfigHandler } from './config/ConfigHandler';
 /**
  * Represents a benchmarking utility for measuring the performance of algorithms.
  */
-export class Benchmark implements IBenchmark {
+export class Benchmark {
   private tests: ITest[] = [];
   private results: IResult[] = [];
   private options: IOptions;
@@ -50,7 +48,7 @@ export class Benchmark implements IBenchmark {
    * @returns {Promise<DataResult>} A promise that resolves to a DataResult instance.
    * @throws Will throw an error if no tests have been added.
    */
-  public async run(): Promise<IDataResult> {
+  public async run(): Promise<DataResult> {
     if (this.tests.length === 0) {
       throw new NoTestsAddedException();
     }
