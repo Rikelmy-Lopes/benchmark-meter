@@ -28,6 +28,7 @@ const benchmark = new Benchmark();
 // The add function takes two arguments:
 // 1. The name of the algorithm
 // 2. A callback containing the algorithm's logic
+// 3. (Optional) A number specifying how many times your algorithm will be executed
 benchmark.add('count to 100_000', () => {
     let sum = 0;
     for (let i = 0; i < 100_000; i += 1) {
