@@ -39,3 +39,26 @@ benchmark.add('count to 100_000', () => {
 benchmark.run().then((result) => console.log(result.get()));
 ```
 
+### Using with Asynchronous Algorithms
+
+If you plan to utilize simple-benchmark with asynchronous algorithms, follow the modified code structure below!
+
+```js
+const benchmark = new Benchmark();
+
+// For asynchronous callbacks, you can use the async/await syntax directly
+benchmark.add('promise', async () => {
+    await promise();
+});
+
+// If your callback is non-async, use .then and return
+benchmark.add('promise', () => {
+    return promise().then();
+});
+
+// Ensure you follow this structure!
+// Using other approaches may not work as expected!
+
+
+benchmark.run().then((result) => console.log(result.get()));
+```
