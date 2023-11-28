@@ -143,3 +143,45 @@ benchmark.add('count to 1_000_000', () => {
 ```
 
 Here, we specified different execution frequencies for individual algorithms. This allows you to fine-tune the benchmark based on the specific requirements of each algorithm
+
+### Retrieving Benchmark Results
+
+After running your algorithms, you will receive an instance of `DataResult`, which facilitates the display of your benchmark results.
+
+
+#### Using the `get` Method
+
+The `get` method provides the results of your benchmark in an array, following the order in which the algorithms were added:
+
+```js
+benchmark.run().then((result) => console.log(result.get()));
+```
+
+#### Using the `fastestToSlowest` Method
+
+The `fastestToSlowest` method returns an array where the first position (index 0) corresponds to the fastest algorithm, and the last position represents the slowest algorithm:
+
+```js
+benchmark.run().then((result) => console.log(result.fastestToSlowest()));
+```
+
+#### Using the `fastest` Method
+
+To obtain the information about the fastest algorithm, you can use the `fastest` method, which returns an object containing details about the fastest algorithm:
+
+```js
+benchmark.run().then((result) => console.log(result.fastest()));
+```
+
+#### Additional Result Retrieval Methods
+
+In addition to the previously mentioned methods, there are two more methods that function in a similar manner:
+
+```js
+// returns an array where the first position represents the slowest algorithm, and the last position corresponds to the fastest algorithm
+
+benchmark.run().then((result) => console.log(result.slowestToFastest()));
+
+// returns an object containing details about the slowest algorithm
+benchmark.run().then((result) => console.log(result.slowest()));
+```
