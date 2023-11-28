@@ -95,3 +95,51 @@ benchmark.add('promise', async () => {
 // Run the benchmark and log the results
 benchmark.run().then((result) => console.log(result.get()));
 ```
+
+### Modifying Execution Frequency
+
+You have the flexibility to adjust how many times your algorithms will be executed, providing a balance between precision and benchmark duration. The default execution frequency for all algorithms is set to 10 times. If you wish to customize this, follow the examples below:
+
+#### Adjusting Frequency for All Algorithms:
+
+```js
+const config = {
+    repeat: 20,
+}
+
+const benchmark = new Benchmark(config);
+
+// Continue with the rest of your code...
+```
+
+In this case, all algorithms added to the benchmark will execute 20 times, enhancing result precision at the cost of increased benchmark duration
+
+#### Specifying Frequency for Individual Algorithms:
+
+```js
+const config = {
+    repeat: 20,
+}
+
+const benchmark = new Benchmark(config);
+
+// Algorithm 1: Count to 100,000 (executed 20 times)
+benchmark.add('count to 100,000', () => {
+    let sum = 0;
+    for (let i = 0; i < 100_000; i += 1) {
+        sum += 1;
+    }
+});
+
+// Algorithm 2: Count to 1,000,000 (executed 5 times)
+benchmark.add('count to 1,000,000', () => {
+    let sum = 0;
+    for (let i = 0; i < 1_000_000; i += 1) {
+        sum += 1;
+    }
+}, 5);
+
+// Continue with the rest of your code...
+```
+
+Here, we specified different execution frequencies for individual algorithms. This allows you to fine-tune the benchmark based on the specific requirements of each algorithm
