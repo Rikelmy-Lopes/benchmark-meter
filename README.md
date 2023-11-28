@@ -178,8 +178,8 @@ benchmark.run().then((result) => console.log(result.fastest()));
 In addition to the previously mentioned methods, there are two more methods that function in a similar manner:
 
 ```js
-// returns an array where the first position represents the slowest algorithm, and the last position corresponds to the fastest algorithm
-
+// returns an array where the first position represents the slowest algorithm, 
+// and the last position corresponds to the fastest algorithm
 benchmark.run().then((result) => console.log(result.slowestToFastest()));
 
 // returns an object containing details about the slowest algorithm
