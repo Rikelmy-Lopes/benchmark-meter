@@ -13,7 +13,7 @@ npm i simple-benchmark -D
 
 ### Using with Synchronous Algorithms
 
-To use the simple-benchmark package with synchronous algorithms, follow the steps below:
+To use the simple-benchmark with synchronous algorithms, follow the steps below:
 
 ```js
 // Load the module using import
@@ -123,16 +123,16 @@ const config = {
 
 const benchmark = new Benchmark(config);
 
-// Algorithm 1: Count to 100,000 (executed 20 times)
-benchmark.add('count to 100,000', () => {
+// Algorithm 1: Count to 100_000 (executed 20 times)
+benchmark.add('count to 100_000', () => {
     let sum = 0;
     for (let i = 0; i < 100_000; i += 1) {
         sum += 1;
     }
 });
 
-// Algorithm 2: Count to 1,000,000 (executed 5 times)
-benchmark.add('count to 1,000,000', () => {
+// Algorithm 2: Count to 1_000_000 (executed 5 times)
+benchmark.add('count to 1_000_000', () => {
     let sum = 0;
     for (let i = 0; i < 1_000_000; i += 1) {
         sum += 1;

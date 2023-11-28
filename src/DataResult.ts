@@ -1,10 +1,11 @@
 import { IResult } from './types';
+import { IDataResult } from './types/IDataResult';
 
 /**
  * Represents a data result implementation.
  *
  */
-export class DataResult {
+export class DataResult implements IDataResult {
   private results: IResult[];
   private sortedResults: IResult[] = [];
 
