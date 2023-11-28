@@ -5,7 +5,7 @@ Simple-benchmark is a straightforward benchmarking tool designed for measuring t
 
 ## Usage
 
-Install the package using npm:
+Install using npm:
 
 ```bash
 npm i simple-benchmark -D
@@ -25,7 +25,7 @@ const { Benchmark } = require('simple-benchmark');
 // Create a new instance of the Benchmark class
 const benchmark = new Benchmark();
 
-// The add function takes two arguments:
+// The add method takes three arguments:
 // 1. The name of the algorithm
 // 2. A callback containing the algorithm's logic
 // 3. (Optional) A number specifying how many times your algorithm will be executed
@@ -52,7 +52,7 @@ benchmark.add('promise', async () => {
     await promise();
 });
 
-// If your callback is non-async, use .then and return
+// If your callback is non-async, use .then with return
 benchmark.add('promise', () => {
     return promise().then();
 });
@@ -61,5 +61,37 @@ benchmark.add('promise', () => {
 // Using other approaches may not work as expected!
 
 
+benchmark.run().then((result) => console.log(result.get()));
+```
+
+### Adding Multiple Algorithms
+
+To include more than one algorithm, you can use the add method multiple times, as demonstrated in the example below:
+
+```js
+const benchmark = new Benchmark();
+
+// Algorithm 1: Count to 100_000
+benchmark.add('count to 100_000', () => {
+    let sum = 0;
+    for (let i = 0; i < 100_000; i += 1) {
+        sum += 1;
+    }
+});
+
+// Algorithm 2: Count to 1_000_000
+benchmark.add('count to 1_000_000', () => {
+    let sum = 0;
+    for (let i = 0; i < 1_000_000; i += 1) {
+        sum += 1;
+    }
+});
+
+// Algorithm 3: Asynchronous Promise
+benchmark.add('promise', async () => {
+    await promise();
+});
+
+// Run the benchmark and log the results
 benchmark.run().then((result) => console.log(result.get()));
 ```
