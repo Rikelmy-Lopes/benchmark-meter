@@ -1,12 +1,11 @@
 
 
-export type ITypes = 'string' | 'number' | 'boolean' | 'array' | 'object' | 'function';
-
-export interface IAlgorithm {
+export interface IAlgorithmBody {
     name: string;
     fn: () => unknown;
     repeat: number;
 }
+
 
 /**
  * Represents the result of a performance measurement for a specific algorithm.
@@ -22,21 +21,21 @@ export interface IResult {
     name: string;
   
     /**
-     * The average duration of the algorithm in a human-readable format.
+     * The average duration of the algorithm.
      *
      * @type {string}
      */
     average: string;
   
     /**
-     * The duration of the fastest execution of the algorithm in a human-readable format.
+     * The duration of the fastest execution of the algorithm.
      *
      * @type {string}
      */
     fastest: string;
   
     /**
-     * The duration of the slowest execution of the algorithm in a human-readable format.
+     * The duration of the slowest execution of the algorithm.
      *
      * @type {string}
      */
@@ -48,9 +47,9 @@ export interface IResult {
 /**
  * Options for configuring the Algorithm execution.
  *
- * @interface IOptions
+ * @interface BenchmarkOptions
  */
-export interface IOptions {
+export interface IBenchmarkOptions {
     /**
      * The number of times the algorithm will be executed.
      *

@@ -1,5 +1,5 @@
 import { DataResult } from './DataResult';
-import { IAlgorithm, IOptions, IResult } from './types';
+import { IAlgorithmBody, IBenchmarkOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
 import { DuplicateNameException, NoTestsAddedException } from './exceptions';
 import { ConfigHandler } from './config/ConfigHandler';
@@ -9,16 +9,16 @@ import { ConfigHandler } from './config/ConfigHandler';
  * Represents a benchmarking utility for measuring the performance of algorithms.
  */
 export class Benchmark {
-  private algorithms: IAlgorithm[] = [];
+  private algorithms: IAlgorithmBody[] = [];
   private results: IResult[] = [];
-  private options: IOptions;
+  private options: IBenchmarkOptions;
 
   /**
    * Creates an instance of Benchmark.
    *
    * @param {IOptions} options - The options for configuring the benchmark.
    */
-  constructor(options: IOptions = {}) {
+  constructor(options: IBenchmarkOptions = {}) {
     this.options = ConfigHandler.parse(options);
   }
 

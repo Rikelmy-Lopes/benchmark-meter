@@ -1,7 +1,7 @@
 {
   "name": "simple-benchmark",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple-benchmark is a straightforward benchmarking tool designed for measuring the performance of algorithms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
