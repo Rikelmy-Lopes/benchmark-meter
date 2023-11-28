@@ -8,12 +8,20 @@
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com:Rikelmy-Lopes/simple-benchmark.git"
+  },
   "keywords": [
     "performance",
     "benchmark"
   ],
-  "author": "",
-  "license": "ISC",
+  "author": "Rikelmy Lopes",
+  "license": "MIT",
+  "homepage": "https://github.com/Rikelmy-Lopes/simple-benchmark",
+  "bugs": {
+    "url": "https://github.com/Rikelmy-Lopes/simple-benchmark/issues"
+  },
   "devDependencies": {
     "@types/node": "^20.9.0",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
