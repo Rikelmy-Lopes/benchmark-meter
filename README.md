@@ -1,6 +1,6 @@
-# simple-benchmark
+# benchmark-meter
 
-Simple-benchmark is a straightforward benchmarking tool designed for measuring the performance of algorithms.
+benchmark-meter is a straightforward benchmarking tool designed for measuring the performance of algorithms.
 
 
 ## Usage
@@ -8,19 +8,19 @@ Simple-benchmark is a straightforward benchmarking tool designed for measuring t
 Install using npm:
 
 ```bash
-npm i simple-benchmark -D
+npm i benchmark-meter -D
 ```
 
 ### Using with Synchronous Algorithms
 
-To use the simple-benchmark with synchronous algorithms, follow the steps below:
+To use the benchmark-meter with synchronous algorithms, follow the steps below:
 
 ```js
 // Load the module using import
-import { Benchmark } from 'simple-benchmark';
+import { Benchmark } from 'benchmark-meter';
 
 // Alternatively, use CommonJS syntax
-const { Benchmark } = require('simple-benchmark');
+const { Benchmark } = require('benchmark-meter');
 
 // Create a new instance of the Benchmark class
 const benchmark = new Benchmark();
@@ -42,7 +42,7 @@ benchmark.run().then((result) => console.log(result.get()));
 
 ### Using with Asynchronous Algorithms
 
-If you plan to utilize simple-benchmark with asynchronous algorithms, follow the modified code structure below!
+If you plan to utilize benchmark-meter with asynchronous algorithms, follow the modified code structure below!
 
 ```js
 const benchmark = new Benchmark();
