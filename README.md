@@ -186,6 +186,10 @@ benchmark.run().then((result) => console.log(result.slowestToFastest()));
 benchmark.run().then((result) => console.log(result.slowest()));
 ```
 
+#### How is the results Order
+
+All this methods shows before (fastestToSlowest, fastest, slowestToFastest, slowest) are sorted based on the average duration of the execution, this is because sorted base on the fastest or on the slowest execution, dont make much sense, and will make the results inconclusive. 
+
 ### Handling Errors in Algorithms
 
 When your algorithm has the potential to throw an error, it's crucial to handle it appropriately. Errors thrown during the benchmark will halt the execution. Here's how you should handle errors in your algorithms:
