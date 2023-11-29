@@ -186,9 +186,11 @@ benchmark.run().then((result) => console.log(result.slowestToFastest()));
 benchmark.run().then((result) => console.log(result.slowest()));
 ```
 
-#### How is the results Order
+#### Result Order Clarification
 
-All this methods shows before (fastestToSlowest, fastest, slowestToFastest, slowest) are sorted based on the average duration of the execution, this is because sorted base on the fastest or on the slowest execution, dont make much sense, and will make the results inconclusive. 
+For all the methods mentioned earlier (`fastestToSlowest`, `fastest`, `slowestToFastest`, `slowest`), the results are ordered based on the average duration of execution. This sorting approach is selected because arranging results solely by the fastest or slowest execution does not offer conclusive insights.
+
+The average duration is calculated by summing up all the execution durations and dividing that sum by the number of times the algorithm was executed. This method provides a more representative measure of performance, considering variations in execution times across multiple repetitions.
 
 ### Handling Errors in Algorithms
 
