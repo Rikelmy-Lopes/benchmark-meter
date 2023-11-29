@@ -7,6 +7,7 @@ import { ConfigHandler } from './config/ConfigHandler';
 
 /**
  * Represents a benchmarking utility for measuring the performance of algorithms.
+ * @since 1.0.0
  */
 export class Benchmark {
   private algorithms: IAlgorithmBody[] = [];
@@ -29,6 +30,7 @@ export class Benchmark {
    * @param {IFunction} fn - The callback function with the algorithm to be benchmarked.
    * @param {number | undefined} repeat - The number of times to repeat the algorithm (optional).
    * @throws Will throw an error if the algorithm name is already used or if the repeat count is not greater than 0.
+   * @since 1.0.0
    */
   public add(name: string, fn: () => unknown, repeat?: number | undefined): void {
     if (typeof name !== 'string') {
@@ -56,6 +58,7 @@ export class Benchmark {
    *
    * @returns {Promise<DataResult>} A promise that resolves to a DataResult instance.
    * @throws Will throw an error if no algorithms have been added.
+   * @since 1.0.0
    */
   public async run(): Promise<DataResult> {
     if (this.algorithms.length === 0) {
@@ -71,6 +74,7 @@ export class Benchmark {
 
   /**
    * Clears the results array.
+   * @since 1.0.0
    */
   public clearResults(): void {
     this.results = [];
@@ -78,6 +82,7 @@ export class Benchmark {
 
   /**
    * Clears the algorithm array.
+   * @since 1.0.0
    */
   public clearAlgorithms(): void {
     this.algorithms = [];

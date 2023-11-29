@@ -23,7 +23,7 @@ export class ConfigHandler {
   }
 
   public static validateValue({ repeat }: IBenchmarkOptions) {
-    if (repeat !== undefined && repeat <= 0) {
+    if (repeat !== undefined && repeat < 1) {
       throw new InvalidValueException('repeat must be bigger than 0');
     }
   }

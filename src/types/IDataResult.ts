@@ -3,6 +3,7 @@ import { IResult } from '.';
 /**
  * Interface representing the results of the benchmarks.
  * @interface IDataResult
+ * @since 1.0.0
  */
 export interface IDataResult {
     /**
