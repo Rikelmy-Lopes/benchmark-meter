@@ -16,15 +16,15 @@ export class ConfigHandler {
     }
   }
 
-  private static validateType({ repeat }: IBenchmarkOptions) {
+  public static validateType({ repeat }: IBenchmarkOptions) {
     if (repeat !== undefined && typeof repeat !== 'number') {
-      throw new TypeError(`Repeat must be a number. Received: ${typeof repeat}`);
+      throw new TypeError(`repeat must be a number. Received: ${typeof repeat}`);
     }
   }
 
-  private static validateValue({ repeat }: IBenchmarkOptions) {
+  public static validateValue({ repeat }: IBenchmarkOptions) {
     if (repeat !== undefined && repeat <= 0) {
-      throw new InvalidValueException('Repeat must be bigger than 0');
+      throw new InvalidValueException('repeat must be bigger than 0');
     }
   }
 }

@@ -31,9 +31,18 @@ export class Benchmark {
    * @throws Will throw an error if the algorithm name is already used or if the repeat count is not greater than 0.
    */
   public add(name: string, fn: () => unknown, repeat?: number | undefined): void {
+    if (typeof name !== 'string') {
+      throw new TypeError(`name must be a string. Received: ${typeof name}`);
+    }
     if (this.isNameAlreadyUsed(name)) {
       throw new DuplicateNameException(name);
     }
+    if (typeof fn !== 'function') {
+      throw new TypeError(`fn must be a function. Received: ${typeof fn}`);
+    }
+
+    ConfigHandler.validateType({ repeat });
+    ConfigHandler.validateValue({ repeat });
 
     this.algorithms.push({
       name,
