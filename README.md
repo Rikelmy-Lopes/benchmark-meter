@@ -209,3 +209,7 @@ benchmark.add('can throw an Error', () => {
 });
 
 ```
+
+### Using with API Calls
+
+It is not recommended to use our lib with APIs, especially when specifying a larger repeat option (greater than 1). This can potentially lead to HTTP Error 429 (Too Many Requests) due to an excessive number of API calls. If the API is still under development and you have control over it, then you may consider using it in such cases.
