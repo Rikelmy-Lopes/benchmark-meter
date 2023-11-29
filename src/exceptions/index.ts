@@ -1,7 +1,7 @@
 
 export class DuplicateNameException extends Error {
   constructor(name: string) {
-    super(`Test with the name "${name}" already exists.`);
+    super(`Algorithm with the name "${name}" already exists.`);
     this.name = 'DuplicateNameException';
   }
 }
@@ -13,10 +13,10 @@ export class InvalidValueException extends Error {
   }
 }
   
-export class NoTestsAddedException extends Error {
+export class NoAlgorithmsAddedException extends Error {
   constructor() {
-    super('At least one test must be added.');
-    this.name = 'NoTestsAddedException';
+    super('At least one algorithm must be added.');
+    this.name = 'NoAlgorithmsAddedException';
   }
 }
   

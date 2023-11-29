@@ -1,7 +1,7 @@
 import { DataResult } from './DataResult';
 import { IAlgorithmBody, IBenchmarkOptions, IResult } from './types';
 import { performance } from 'node:perf_hooks';
-import { DuplicateNameException, NoTestsAddedException } from './exceptions';
+import { DuplicateNameException, NoAlgorithmsAddedException } from './exceptions';
 import { ConfigHandler } from './config/ConfigHandler';
 
 
@@ -50,7 +50,7 @@ export class Benchmark {
    */
   public async run(): Promise<DataResult> {
     if (this.algorithms.length === 0) {
-      throw new NoTestsAddedException();
+      throw new NoAlgorithmsAddedException();
     }
 
     for (const { name, fn, repeat } of this.algorithms) {

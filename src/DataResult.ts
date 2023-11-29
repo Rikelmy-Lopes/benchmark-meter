@@ -20,7 +20,7 @@ export class DataResult implements IDataResult {
   }
 
   /**
-   * Gets the original array of results.
+   * Returns the original array of results.
    *
    * @returns {IResult[]} The original array of results.
    */
@@ -29,7 +29,7 @@ export class DataResult implements IDataResult {
   }
 
   /**
-   * Gets the fastest algorithm.
+   * Returns the fastest benchmark result.
    *
    * @returns {IResult} The fastest algorithm.
    */
@@ -38,7 +38,7 @@ export class DataResult implements IDataResult {
   }
 
   /**
-   * Gets the array of algorithms sorted from fastest to slowest.
+   * Returns an array of benchmark results sorted from fastest to slowest.
    *
    * @returns {IResult[]} The array of algorithms sorted from fastest to slowest.
    */
@@ -47,7 +47,7 @@ export class DataResult implements IDataResult {
   }
 
   /**
-   * Gets the slowest algorithm.
+   *  Returns the slowest benchmark result.
    *
    * @returns {IResult} The slowest algorithm.
    */
@@ -56,7 +56,7 @@ export class DataResult implements IDataResult {
   }
 
   /**
-   * Gets the array of algorithms sorted from slowest to fastest.
+   * Returns an array of benchmark results sorted from slowest to fastest.
    *
    * @returns {IResult[]} The array of algorithms sorted from slowest to fastest.
    */

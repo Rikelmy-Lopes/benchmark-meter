@@ -47,7 +47,7 @@ export interface IResult {
 /**
  * Options for configuring the Algorithm execution.
  *
- * @interface BenchmarkOptions
+ * @interface IBenchmarkOptions
  */
 export interface IBenchmarkOptions {
     /**
