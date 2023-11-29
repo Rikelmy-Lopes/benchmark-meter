@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com:Rikelmy-Lopes/simple-benchmark.git"
+    "url": "git+ssh://git@github.com:Rikelmy-Lopes/benchmark-meter.git"
   },
   "keywords": [
     "performance",
@@ -21,9 +21,9 @@
   ],
   "author": "Rikelmy Lopes",
   "license": "MIT",
-  "homepage": "https://github.com/Rikelmy-Lopes/simple-benchmark",
+  "homepage": "https://github.com/Rikelmy-Lopes/benchmark-meter",
   "bugs": {
-    "url": "https://github.com/Rikelmy-Lopes/simple-benchmark/issues"
+    "url": "https://github.com/Rikelmy-Lopes/benchmark-meter/issues"
   },
   "devDependencies": {
     "@types/node": "^20.9.0",
