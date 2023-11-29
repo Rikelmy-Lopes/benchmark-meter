@@ -185,3 +185,27 @@ benchmark.run().then((result) => console.log(result.slowestToFastest()));
 // returns an object containing details about the slowest algorithm
 benchmark.run().then((result) => console.log(result.slowest()));
 ```
+
+### Handling Errors in Algorithms
+
+When your algorithm has the potential to throw an error, it's crucial to handle it appropriately. Errors thrown during the benchmark will halt the execution. Here's how you should handle errors in your algorithms:
+
+```js
+// Incorrect way: If your algorithm throws an error, it will stop the execution
+benchmark.add('can throw an Error', () => {
+  canThrowAnError();
+});
+
+```
+
+```js
+// Correct way: Handle errors using a try-catch block to prevent execution interruption
+benchmark.add('can throw an Error', () => {
+  try {
+    canThrowAnError();
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+```

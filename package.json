@@ -14,7 +14,10 @@
   },
   "keywords": [
     "performance",
-    "benchmark"
+    "benchmark",
+    "speed",
+    "code performance",
+    "node benchmark"
   ],
   "author": "Rikelmy Lopes",
   "license": "MIT",
